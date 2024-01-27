@@ -75,7 +75,7 @@ public class CharacterController : MonoBehaviour
         {
             shitMeter -= ammount;
             if (Physics.Raycast(transform.position, -transform.up, out var hit, 20f) == false) { return; }
-            Debug.Log($"Shitting on {hit.transform.name}");
+            //Debug.Log($"Shitting on {hit.transform.name}");
             Instantiate(shit, new Vector3(transform.position.x, hit.point.y, transform.position.z), Quaternion.identity, null);
         }
     }

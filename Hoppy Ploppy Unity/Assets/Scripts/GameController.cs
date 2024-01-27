@@ -43,6 +43,5 @@ public class GameController : MonoBehaviour
                 Gizmos.DrawCube(new Vector3(x, 0, y), new Vector3(1, 1, 1));
             }
         }
-        
     }
 }

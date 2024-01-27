@@ -10,5 +10,15 @@ public class ShitController : MonoBehaviour
     void Start()
     {
         PoopSpread.SpreadPoop(transform.position.x, transform.position.z, courics, pungance);
+        var police = FindObjectsOfType<PoliceController>();
+        foreach (var p in police)
+        {
+            //Debug.Log($"Just shat, checking p {p.name} is close");
+            if (Vector3.Magnitude(p.transform.position - transform.position) < p.maxDistanceToStopChasing)
+            {
+                Debug.Log($"p {p.name} is close, causing chase");
+                p.mode = PoliceMode.Chase;
+            }
+        }
     }
 }
