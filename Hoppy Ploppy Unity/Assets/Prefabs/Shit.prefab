@@ -118,5 +118,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc5ecf3e84d4f1f41beb658086d5391e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  courics: 20
+  courics: 5
   pungance: 0.1
