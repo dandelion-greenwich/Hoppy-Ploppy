@@ -6,7 +6,7 @@ public class CharacterController : MonoBehaviour
     CameraController cameraController;
     public float JumpHeight;
 
-    public bool jumping;
+    public bool jumping, climbing;
 
     public float shitMeter;
 
@@ -23,19 +23,38 @@ public class CharacterController : MonoBehaviour
     {
         transform.rotation = Quaternion.EulerAngles(0, cameraController.angleAroundCharacter, 0);
         CaptureInput();
+        
     }
 
     void CaptureInput()
     {
         if (Input.GetKey(KeyCode.W)) {
-            var pos = transform.position;
-            pos -= transform.forward * Speed * Time.deltaTime;
-            transform.position = pos;
+            if (!climbing)
+            {
+                var pos = transform.position;
+                pos -= transform.forward * Speed * Time.deltaTime;
+                transform.position = pos;
+            }
+            else
+            {
+                var pos = transform.position;
+                pos += transform.up * Speed * Time.deltaTime;
+                transform.position = pos;
+            }
         }
         else if (Input.GetKey(KeyCode.S)) {
-            var pos = transform.position;
-            pos += transform.forward * Speed * Time.deltaTime;
-            transform.position = pos;
+            if (!climbing)
+            {
+                var pos = transform.position;
+                pos += transform.forward * Speed * Time.deltaTime;
+                transform.position = pos;
+            }
+            else
+            {
+                var pos = transform.position;
+                pos -= transform.up * Speed * Time.deltaTime;
+                transform.position = pos;
+            }
         }
         if (Input.GetKey(KeyCode.A)) {
             var pos = transform.position;
@@ -63,11 +82,26 @@ public class CharacterController : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         jumping = false;
+        
 
         if (collision.gameObject.tag == "Police")
         {
             Application.Quit();
         }
+
+        if (collision.gameObject.tag == "Tree" && !climbing)
+        {
+            climbing = true;
+            GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePositionY; 
+            //Debug.Log("climbing");
+        }
+        else
+        {                   
+            climbing = false;
+            GetComponent<Rigidbody>().constraints &= ~RigidbodyConstraints.FreezePositionY;            
+        }
+        
+        
     }
 
     void Shit(float ammount)
