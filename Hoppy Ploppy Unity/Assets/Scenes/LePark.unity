@@ -125,6 +125,7 @@ NavMeshSettings:
   m_NavMeshData: {fileID: 23800000, guid: 02519c801d17aaa46af2c422cd5a0482, type: 2}
 --- !u!1 &352401301 stripped
 GameObject:
+  m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 7298376110592250602, guid: 23a9d7b395e120549b5c4d36ca4d2442, type: 3}
   m_PrefabInstance: {fileID: 288537391439804805}
   m_PrefabAsset: {fileID: 0}
@@ -385,7 +386,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06e84699f26c5eb4b8192a99f4ff1b78, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 352401301}
+  target: {fileID: 1319303437}
   angleAroundCharacter: 0
   distance: 5
   height: 5
@@ -691,6 +692,7 @@ PrefabInstance:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
+  - {fileID: 352401306}
   - {fileID: 1489438977}
   - {fileID: 1732373483}
   - {fileID: 699410377}
