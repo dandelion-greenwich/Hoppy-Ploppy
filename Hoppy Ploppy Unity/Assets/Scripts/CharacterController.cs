@@ -47,7 +47,7 @@ public class CharacterController : MonoBehaviour
             transform.position = pos;
         }
 
-        if (Input.GetKeyDown(KeyCode.Space) && jumping == false)
+        if (Input.GetKey(KeyCode.Space) && jumping == false)
         {
             jumping = true;
             GetComponent<Rigidbody>().AddForce(new Vector3(0, JumpHeight * 100, 0));

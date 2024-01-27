@@ -489,6 +489,8 @@ MonoBehaviour:
   angleAroundCharacter: 0
   distance: 5
   height: 5
+  minHeight: 0.5
+  maxHeight: 10
   speed: 0.01
 --- !u!1 &1732373481
 GameObject:

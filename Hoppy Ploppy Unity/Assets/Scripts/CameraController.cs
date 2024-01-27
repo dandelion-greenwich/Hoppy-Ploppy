@@ -9,6 +9,8 @@ public class CameraController : MonoBehaviour
     public float angleAroundCharacter;
     [SerializeField] float distance;
     [SerializeField] float height;
+    [SerializeField] float minHeight;
+    [SerializeField] float maxHeight;
     [SerializeField] float speed;
     Vector3 mousePosition;
 
@@ -22,7 +24,9 @@ public class CameraController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        angleAroundCharacter += GetInput();
+        var mouseDiff = GetInput();
+        angleAroundCharacter += mouseDiff.x;
+        height += mouseDiff.y;
         float relateiveX = distance * Mathf.Sin(angleAroundCharacter);
         float relateiveY = distance * Mathf.Cos(angleAroundCharacter);
         Vector3 targetPos = target.transform.position;
@@ -30,16 +34,14 @@ public class CameraController : MonoBehaviour
         transform.LookAt(targetPos);
     }
 
-    float GetInput()
+    Vector2 GetInput()
     {
         var tmpMousePos = Input.mousePosition;
         var mouseDiffX = tmpMousePos.x - mousePosition.x;
+        var mouseDiffY = tmpMousePos.y - mousePosition.y;
         mousePosition = tmpMousePos;
-        //var mouseDiffY = tmpMousePos.y - mousePosition.y;
-        Debug.Log(mouseDiffX);
+        //if (Input.GetMouseButton(0) == false) return new Vector2();
 
-        if (Input.GetMouseButton(0) == false) return 0f;
-
-        return mouseDiffX * speed;
+        return new Vector2(mouseDiffX * speed, -mouseDiffY * speed);
     }
 }
