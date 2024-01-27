@@ -138,7 +138,7 @@ GameObject:
   - component: {fileID: 352401302}
   - component: {fileID: 352401307}
   m_Layer: 0
-  m_Name: Capsule
+  m_Name: Bird Man
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -159,6 +159,8 @@ MonoBehaviour:
   Speed: 5
   JumpHeight: 3
   jumping: 0
+  shitMeter: 0
+  shit: {fileID: 5791259486208966249, guid: 657d1acb4a2da7349a2e8475a8939514, type: 3}
 --- !u!136 &352401303
 CapsuleCollider:
   m_ObjectHideFlags: 0

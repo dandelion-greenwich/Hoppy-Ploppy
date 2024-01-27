@@ -10,6 +10,10 @@ public class CharacterController : MonoBehaviour
     public float JumpHeight;
 
     public bool jumping;
+
+    public float shitMeter;
+
+    public GameObject shit;
     // Start is called before the first frame update
     void Start()
     {
@@ -52,10 +56,24 @@ public class CharacterController : MonoBehaviour
             jumping = true;
             GetComponent<Rigidbody>().AddForce(new Vector3(0, JumpHeight * 100, 0));
         }
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            Shit(1);
+        }
     }
 
     private void OnCollisionEnter(Collision collision)
     {
         jumping = false;
+    }
+
+    void Shit(float ammount)
+    {
+        if (shitMeter >= ammount)
+        {
+            shitMeter -= ammount;
+            Instantiate(shit, new Vector3(transform.position.x, 0.2f, transform.position.z), Quaternion.identity, null);
+        }
     }
 }
