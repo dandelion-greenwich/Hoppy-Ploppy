@@ -19,13 +19,27 @@ public class GameController : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        var c = Color.yellow;
+        if (PoopSpread.PoopSpreadGrid == null) return;
+        var c = Color.grey;
         c.a = 0.2f;
         Gizmos.color = c;
         for (int x = 0; x < mapXSize; x++)
         {
             for (int y = 0;  y < mapYSize; y++)
             {
+                var poopVal = PoopSpread.PoopSpreadGrid[x][y];
+                if (poopVal > 0)
+                {
+                    c = Color.green;
+                    c.a = PoopSpread.PoopSpreadGrid[x][y];
+                    Gizmos.color = c;
+                }
+                else
+                {
+                    c = Color.grey;
+                    c.a = 0.2f;
+                    Gizmos.color = c;
+                }
                 Gizmos.DrawCube(new Vector3(x, 0, y), new Vector3(1, 1, 1));
             }
         }
