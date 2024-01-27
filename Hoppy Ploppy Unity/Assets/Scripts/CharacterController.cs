@@ -9,6 +9,7 @@ public class CharacterController : MonoBehaviour
     public float Speed = 10;
     CameraController cameraController;
     public float JumpHeight;
+    public GameObject food;
 
     public bool jumping;
 
@@ -79,4 +80,15 @@ public class CharacterController : MonoBehaviour
             Instantiate(shit, new Vector3(transform.position.x, hit.point.y, transform.position.z), Quaternion.identity, null);
         }
     }
+    public void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "Food")
+        {
+            Destroy(other.gameObject);
+            Debug.Log("OWO");
+            shitMeter++;
+        }
+
+    }
+
 }
