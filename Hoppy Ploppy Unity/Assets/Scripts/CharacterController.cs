@@ -63,6 +63,11 @@ public class CharacterController : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         jumping = false;
+
+        if (collision.gameObject.tag == "Police")
+        {
+            Application.Quit();
+        }
     }
 
     void Shit(float ammount)
