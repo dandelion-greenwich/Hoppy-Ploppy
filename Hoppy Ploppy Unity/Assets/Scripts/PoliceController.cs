@@ -18,6 +18,7 @@ public class PoliceController : MonoBehaviour
     public float investigateZoneSize;
     public PoliceMode mode;
     public float maxDistanceToStopChasing = 15f;
+    float cacheAgentSpeed = 0f;
 
     GameObject player;
     // Start is called before the first frame update
@@ -44,6 +45,16 @@ public class PoliceController : MonoBehaviour
             var smelliness = PoopSpread.PoopSpreadGrid
                 [Mathf.FloorToInt(transform.position.x)]
                 [Mathf.FloorToInt(transform.position.z)];
+            if (smelliness > 1)
+            {
+                cacheAgentSpeed = agent.speed;
+                agent.speed = agent.speed / 2;
+            }
+            else if (cacheAgentSpeed != 0)
+            {
+                agent.speed = cacheAgentSpeed;
+                cacheAgentSpeed = 0f;
+            }
             if (smelliness > 0.1 && mode != PoliceMode.Chase)
             {
                 mode = PoliceMode.Investigate;
