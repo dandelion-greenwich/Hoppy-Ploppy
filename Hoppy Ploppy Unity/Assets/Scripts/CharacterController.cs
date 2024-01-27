@@ -16,6 +16,7 @@ public class CharacterController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        transform.rotation = Quaternion.EulerAngles(0, cameraController.angleAroundCharacter, 0);
         CaptureInput();
     }
 
@@ -23,22 +24,22 @@ public class CharacterController : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.W)) {
             var pos = transform.position;
-            pos.z += Speed * Time.deltaTime;
+            pos -= transform.forward * Speed * Time.deltaTime;
             transform.position = pos;
         }
         else if (Input.GetKey(KeyCode.S)) {
             var pos = transform.position;
-            pos.z -= Speed * Time.deltaTime;
+            pos += transform.forward * Speed * Time.deltaTime;
             transform.position = pos;
         }
         if (Input.GetKey(KeyCode.A)) {
             var pos = transform.position;
-            pos.x -= Speed * Time.deltaTime;
+            pos += transform.right * Speed * Time.deltaTime;
             transform.position = pos;
         }
         else if (Input.GetKey(KeyCode.D)) {
             var pos = transform.position;
-            pos.x += Speed * Time.deltaTime;
+            pos -= transform.right * Speed * Time.deltaTime;
             transform.position = pos;
         }
     }
