@@ -16,4 +16,19 @@ public class GameController : MonoBehaviour
             PoopSpread.PoopSpreadGrid[i] = new float[mapYSize];
         }
     }
+
+    private void OnDrawGizmos()
+    {
+        var c = Color.yellow;
+        c.a = 0.2f;
+        Gizmos.color = c;
+        for (int x = 0; x < mapXSize; x++)
+        {
+            for (int y = 0;  y < mapYSize; y++)
+            {
+                Gizmos.DrawCube(new Vector3(x, 0, y), new Vector3(1, 1, 1));
+            }
+        }
+        
+    }
 }
