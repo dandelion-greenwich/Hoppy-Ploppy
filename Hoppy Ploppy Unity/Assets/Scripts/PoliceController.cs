@@ -129,6 +129,7 @@ public class PoliceController : MonoBehaviour
 
     private void OnDrawGizmos()
     {
+        if (agent == null) return;
         if (mode == PoliceMode.Investigate)
         {
             Color c = Color.red;
