@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class CharacterController : MonoBehaviour
 {
@@ -73,7 +74,9 @@ public class CharacterController : MonoBehaviour
         if (shitMeter >= ammount)
         {
             shitMeter -= ammount;
-            Instantiate(shit, new Vector3(transform.position.x, 0.2f, transform.position.z), Quaternion.identity, null);
+            if (Physics.Raycast(transform.position, -transform.up, out var hit, 20f) == false) { return; }
+            Debug.Log($"Shitting on {hit.transform.name}");
+            Instantiate(shit, new Vector3(transform.position.x, hit.point.y, transform.position.z), Quaternion.identity, null);
         }
     }
 }
