@@ -1,11 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class CharacterController : MonoBehaviour
 {
     public float Speed = 10;
     CameraController cameraController;
+    public float JumpHeight;
+
+    public bool jumping;
     // Start is called before the first frame update
     void Start()
     {
@@ -42,5 +46,16 @@ public class CharacterController : MonoBehaviour
             pos -= transform.right * Speed * Time.deltaTime;
             transform.position = pos;
         }
+
+        if (Input.GetKeyDown(KeyCode.Space) && jumping == false)
+        {
+            jumping = true;
+            GetComponent<Rigidbody>().AddForce(new Vector3(0, JumpHeight * 100, 0));
+        }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        jumping = false;
     }
 }
