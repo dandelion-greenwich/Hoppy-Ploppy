@@ -8,6 +8,7 @@ public static class PoopSpread
     static public float[][] PoopSpreadGrid;
     static int xLength => PoopSpreadGrid.Length;
     static int yLength => PoopSpreadGrid[0].Length;
+    static int count;
 
     public static void SpreadPoop(float xpos, float ypos, float courics, float pungance) { // courics is radius of spread, pungance is strength
         for (int x = Mathf.Max(0,Mathf.FloorToInt(xpos-courics-1)); x < Mathf.Min(Mathf.CeilToInt(xpos + courics + 1), xLength); x++)
@@ -20,6 +21,11 @@ public static class PoopSpread
                 if (distance <= courics) {
                     try
                     {
+                        if (pungance == 0) 
+                        { 
+                            count++;
+                            Debug.Log(count);
+                        }
                         PoopSpreadGrid[x][y] += pungance;
                     }
                     catch (Exception e)
