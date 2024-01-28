@@ -118,6 +118,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc5ecf3e84d4f1f41beb658086d5391e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  courics: 5
+  courics: 20
   pungance: 0.1
   grass: {fileID: 8417843168963764857, guid: 6fd6f9dac99181f4a9c17721bc5f950e, type: 3}
