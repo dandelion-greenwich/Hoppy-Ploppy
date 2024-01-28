@@ -20,6 +20,7 @@ public class PoliceController : MonoBehaviour
     public float maxDistanceToStopChasing = 15f;
     float cacheAgentSpeed = 0f;
     Animator animator;
+    public float remainingDistance;
 
     GameObject player;
     // Start is called before the first frame update
@@ -38,6 +39,7 @@ public class PoliceController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        remainingDistance = agent.remainingDistance;
     }
 
     IEnumerator Smell()
@@ -137,6 +139,7 @@ public class PoliceController : MonoBehaviour
                         yield return new WaitForSeconds(0.5f);
                     }
                     yield return new WaitForSeconds(0.5f);
+                    mode = PoliceMode.Wonder;
                     break;
             }
             yield return null;
