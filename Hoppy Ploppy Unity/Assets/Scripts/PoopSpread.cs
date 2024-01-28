@@ -24,7 +24,6 @@ public static class PoopSpread
                         {
                             AddGrass(x,y);
                             count++;
-                            Debug.Log(count);
                         }
                         PoopSpreadGrid[x][y] += pungance;
                     }

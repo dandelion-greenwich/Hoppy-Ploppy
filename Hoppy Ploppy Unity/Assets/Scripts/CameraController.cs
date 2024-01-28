@@ -30,7 +30,7 @@ public class CameraController : MonoBehaviour
         float relateiveX = distance * Mathf.Sin(angleAroundCharacter);
         float relateiveY = distance * Mathf.Cos(angleAroundCharacter);
         Vector3 targetPos = target.transform.position;
-        transform.position = new Vector3(targetPos.x + relateiveX, height, targetPos.z + relateiveY);
+        transform.position = new Vector3(targetPos.x + relateiveX, targetPos.y + height, targetPos.z + relateiveY);
         transform.LookAt(targetPos);
     }
 
