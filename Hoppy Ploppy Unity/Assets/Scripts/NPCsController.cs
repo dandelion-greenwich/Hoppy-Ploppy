@@ -100,7 +100,7 @@ public class NPCsController : MonoBehaviour
                     newYPos = Random.Range(
                         Mathf.Min(0, investigationZone.y - investigateZoneSize),
                         Mathf.Max(investigationZone.y + investigateZoneSize));
-                    //Debug.Log($"Police investigate to position ({newXPos},{newYPos})");
+                    //Debug.Log($"NPC Move Away to position ({newXPos},{newYPos})");
                     agent.destination = new Vector3(newXPos, 0, newYPos);
                     while (agent.remainingDistance > 0.3)
                     {
