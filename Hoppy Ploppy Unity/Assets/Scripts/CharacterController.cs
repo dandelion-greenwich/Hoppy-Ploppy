@@ -7,7 +7,7 @@ public class CharacterController : MonoBehaviour
     CameraController cameraController;
     public float JumpHeight;
 
-    public bool jumping, climbing, treeColl;
+    public bool jumping, climbing, treeColl, gamePaused;
 
     public float shitMeter;
 
@@ -112,7 +112,7 @@ public class CharacterController : MonoBehaviour
             animiator.SetBool("Jump", false);
             animiator.SetBool("Poo", true);
             animiator.SetBool("Climb", false);
-        }
+        }        
     }
 
     private void OnCollisionEnter(Collision collision)
