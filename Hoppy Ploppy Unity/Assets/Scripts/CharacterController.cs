@@ -11,11 +11,14 @@ public class CharacterController : MonoBehaviour
     public float shitMeter;
 
     public GameObject shit;
+    Animator animiator;
     // Start is called before the first frame update
     void Start()
     {
         Camera cam = Camera.main;
         cameraController = cam.GetComponent<CameraController>();
+        animiator = GetComponentInChildren<Animator>();
+
     }
 
     // Update is called once per frame
@@ -27,7 +30,6 @@ public class CharacterController : MonoBehaviour
             CollidingWithTree();
         }
         CaptureInput();
-        
     }
 
     void CaptureInput()
@@ -37,13 +39,21 @@ public class CharacterController : MonoBehaviour
             {
                 var pos = transform.position;
                 pos -= transform.forward * Speed * Time.deltaTime;
-                transform.position = pos;               
+                transform.position = pos;
+                animiator.SetBool("Walk", true);
+                animiator.SetBool("Jump", false);
+                animiator.SetBool("Poo", false);
+                animiator.SetBool("Climb", false);
             }
             else
             {
                 var pos = transform.position;
                 pos += transform.up * Speed * Time.deltaTime;
                 transform.position = pos;
+                animiator.SetBool("Walk", false);
+                animiator.SetBool("Jump", false);
+                animiator.SetBool("Poo", false);
+                animiator.SetBool("Climb", true);
             }
         }
         else if (Input.GetKey(KeyCode.S)) {
@@ -51,35 +61,59 @@ public class CharacterController : MonoBehaviour
             {
                 var pos = transform.position;
                 pos += transform.forward * Speed * Time.deltaTime;
-                transform.position = pos;                
+                transform.position = pos;
+                animiator.SetBool("Walk", true);
+                animiator.SetBool("Jump", false);
+                animiator.SetBool("Poo", false);
+                animiator.SetBool("Climb", false);
             }
             else
             {
                 var pos = transform.position;
                 pos -= transform.up * Speed * Time.deltaTime;
                 transform.position = pos;
+                animiator.SetBool("Walk", false);
+                animiator.SetBool("Jump", false);
+                animiator.SetBool("Poo", false);
+                animiator.SetBool("Climb", true);
             }
         }
         if (Input.GetKey(KeyCode.A)) {
             var pos = transform.position;
             pos += transform.right * Speed * Time.deltaTime;
             transform.position = pos;
+            animiator.SetBool("Walk", true);
+            animiator.SetBool("Jump", false);
+            animiator.SetBool("Poo", false);
+            animiator.SetBool("Climb", false);
         }
         else if (Input.GetKey(KeyCode.D)) {
             var pos = transform.position;
             pos -= transform.right * Speed * Time.deltaTime;
             transform.position = pos;
+            animiator.SetBool("Walk", true);
+            animiator.SetBool("Jump", false);
+            animiator.SetBool("Poo", false);
+            animiator.SetBool("Climb", false);
         }
 
         if (Input.GetKey(KeyCode.Space) && jumping == false)
         {
             jumping = true;
             GetComponent<Rigidbody>().AddForce(new Vector3(0, JumpHeight * 100, 0));
+            animiator.SetBool("Walk", false);
+            animiator.SetBool("Jump", true);
+            animiator.SetBool("Poo", false);
+            animiator.SetBool("Climb", false);
         }
 
         if (Input.GetMouseButtonDown(0))
         {
             Shit(1);
+            animiator.SetBool("Walk", false);
+            animiator.SetBool("Jump", false);
+            animiator.SetBool("Poo", true);
+            animiator.SetBool("Climb", false);
         }
     }
 

@@ -19,11 +19,13 @@ public class PoliceController : MonoBehaviour
     public PoliceMode mode;
     public float maxDistanceToStopChasing = 15f;
     float cacheAgentSpeed = 0f;
+    Animator animator;
 
     GameObject player;
     // Start is called before the first frame update
     void Start()
     {
+        animator = GetComponentInChildren<Animator>();
         agent = GetComponent<NavMeshAgent>();
         gameController = GameObject.Find("GameController").GetComponent<GameController>();
         StartCoroutine(MoveRandomPlace());
@@ -83,6 +85,9 @@ public class PoliceController : MonoBehaviour
             switch (mode)
             {
                 case PoliceMode.Wonder:
+                    animator.SetBool("Walk", true);
+                    animator.SetBool("Investigate", false);
+                    animator.SetBool("Chase", false);
                     //Debug.Log("Police Wonder");
                     newXPos = Random.Range(0, gameController.mapXSize);
                     newYPos = Random.Range(0, gameController.mapYSize);
@@ -91,11 +96,20 @@ public class PoliceController : MonoBehaviour
                     var startWonderTime = Time.time;
                     while (Time.time - startWonderTime < persistance)
                     {
+                        if (agent.remainingDistance < 0.3)
+                        {
+                            animator.SetBool("Walk", false);
+                            animator.SetBool("Investigate", false);
+                            animator.SetBool("Chase", false);
+                        }
                         if (mode != PoliceMode.Wonder) break;
                         yield return null;
                     }
                     break;
                 case PoliceMode.Investigate:
+                    animator.SetBool("Walk", false);
+                    animator.SetBool("Investigate", true);
+                    animator.SetBool("Chase", false);
                     //Debug.Log("Police Investigate");
                     newXPos = Random.Range(
                         Mathf.Max(0, investigationZone.x - investigateZoneSize), 
@@ -111,6 +125,9 @@ public class PoliceController : MonoBehaviour
                     }
                     break;
                 case PoliceMode.Chase:
+                    animator.SetBool("Walk", false);
+                    animator.SetBool("Investigate", false);
+                    animator.SetBool("Chase", true);
                     //Debug.Log("Police Chase");
                     agent.destination = player.transform.position;
                     while (agent.remainingDistance < maxDistanceToStopChasing)
