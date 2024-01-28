@@ -40,7 +40,7 @@ public class CameraController : MonoBehaviour
         var mouseDiffX = tmpMousePos.x - mousePosition.x;
         var mouseDiffY = tmpMousePos.y - mousePosition.y;
         mousePosition = tmpMousePos;
-        //if (Input.GetMouseButton(0) == false) return new Vector2();
+        if (Input.GetMouseButton(1) == false) return new Vector2();
 
         return new Vector2(mouseDiffX * speed, -mouseDiffY * speed);
     }
