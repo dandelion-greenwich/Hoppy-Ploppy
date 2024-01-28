@@ -22,10 +22,7 @@ public class CharacterController : MonoBehaviour
     void Update()
     {
         transform.rotation = Quaternion.EulerAngles(0, cameraController.angleAroundCharacter, 0);
-        if (treeColl)
-        {
-            CollidingWithTree();
-        }
+        CollidingWithTree();
         CaptureInput();
         
     }
@@ -104,9 +101,10 @@ public class CharacterController : MonoBehaviour
             treeColl = true;
             jumping = false;
             Debug.Log("climbing");
-        }        
+        }
         
-        if(collision == null)
+        
+        if(collision == null || collision.gameObject.tag != "Tree")
         {
             jumping = false;
             climbing = false;
@@ -124,12 +122,12 @@ public class CharacterController : MonoBehaviour
         if (!treeColl && !climbing)
         {
             GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
-            GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotationX;
-            GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotationZ;            
+            GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;           
         }
         else
         {
             GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePositionY;
+            GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
         }
     }
 
