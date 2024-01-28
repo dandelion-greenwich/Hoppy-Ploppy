@@ -174,7 +174,8 @@ public class CharacterController : MonoBehaviour
             if (Physics.Raycast(transform.position, -transform.up, out var hit, 20f) == false) { return; }
             //Debug.Log($"Shitting on {hit.transform.name}");
             var type = Random.Range(0, shit.Count);
-            Instantiate(shit[type], new Vector3(transform.position.x, hit.point.y, transform.position.z), Quaternion.identity, null);
+            Instantiate(shit[type], new Vector3(transform.position.x, hit.point.y, transform.position.z), 
+                Quaternion.Euler(0f, Random.Range(0,360),0f), null);
         }
     }
     

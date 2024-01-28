@@ -19,10 +19,12 @@ public class NPCsController : MonoBehaviour
     public NPCMode mode;
     public float maxDistanceToStopChasing = 15f;
     float cacheAgentSpeed = 0f;
-    
+    Animator animator;
+
     // Start is called before the first frame update
     void Start()
     {
+        animator = GetComponentInChildren<Animator>();
         agent = GetComponent<NavMeshAgent>();
         gameController = GameObject.Find("GameController").GetComponent<GameController>();
         StartCoroutine(MoveRandomPlace());
@@ -80,6 +82,8 @@ public class NPCsController : MonoBehaviour
             switch (mode)
             {
                 case NPCMode.Wonder:
+                    animator.SetBool("Walk", true);
+                    animator.SetBool("Run", false);
                     //Debug.Log("NPC Wonder");
                     newXPos = Random.Range(0, gameController.mapXSize);
                     newYPos = Random.Range(0, gameController.mapYSize);
@@ -93,6 +97,8 @@ public class NPCsController : MonoBehaviour
                     }
                     break;
                 case NPCMode.MoveAway:
+                    animator.SetBool("Walk", false);
+                    animator.SetBool("Run", true);
                     //Debug.Log("Move Away");
                     newXPos = Random.Range(
                         Mathf.Min(0, investigationZone.x - investigateZoneSize),
@@ -108,6 +114,8 @@ public class NPCsController : MonoBehaviour
                     }
                     break;
             }
+            animator.SetBool("Walk", false);
+            animator.SetBool("Run", false);
             yield return null;
         }
     }
