@@ -20,7 +20,7 @@ public class Respawn : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
-            other.transform.position = new Vector3 (0, 3, 0);
+            other.transform.position = new Vector3 (3, 10, 3);
         }
     }
 }
