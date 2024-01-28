@@ -77,3 +77,9 @@ Hoppy Ploppy Unity/Logs/
 Hoppy Ploppy Unity/ProjectSettings/
 
 *.meta
+
+Hoppy Ploppy Unity/UserSettings/
+
+Hoppy Ploppy Unity/Assets/Scenes/
+
+Hoppy Ploppy Unity/obj/Debug/

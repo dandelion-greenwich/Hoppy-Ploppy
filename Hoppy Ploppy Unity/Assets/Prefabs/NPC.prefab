@@ -13,9 +13,9 @@ GameObject:
   - component: {fileID: 8135752925031404302}
   - component: {fileID: 8661364323821364165}
   - component: {fileID: 6864813392672264301}
-  - component: {fileID: 2703589698332301567}
+  - component: {fileID: 8818989211663479314}
   m_Layer: 0
-  m_Name: Police
+  m_Name: NPC
   m_TagString: Police
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -132,7 +132,7 @@ NavMeshAgent:
   m_BaseOffset: 1
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &2703589698332301567
+--- !u!114 &8818989211663479314
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -141,7 +141,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2035609598923835927}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 42f8fe99e98dec645a75926648bae062, type: 3}
+  m_Script: {fileID: 11500000, guid: 8e9cc6944781060419b83ff742e1bc9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   persistance: 5
