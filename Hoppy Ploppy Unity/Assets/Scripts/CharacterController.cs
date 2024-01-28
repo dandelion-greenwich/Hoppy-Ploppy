@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class CharacterController : MonoBehaviour
@@ -10,7 +11,7 @@ public class CharacterController : MonoBehaviour
 
     public float shitMeter;
 
-    public GameObject shit;
+    public List<GameObject> shit;
     Animator animiator;
     // Start is called before the first frame update
     void Start()
@@ -172,7 +173,8 @@ public class CharacterController : MonoBehaviour
             shitMeter -= ammount;
             if (Physics.Raycast(transform.position, -transform.up, out var hit, 20f) == false) { return; }
             //Debug.Log($"Shitting on {hit.transform.name}");
-            Instantiate(shit, new Vector3(transform.position.x, hit.point.y, transform.position.z), Quaternion.identity, null);
+            var type = Random.Range(0, shit.Count);
+            Instantiate(shit[type], new Vector3(transform.position.x, hit.point.y, transform.position.z), Quaternion.identity, null);
         }
     }
     
