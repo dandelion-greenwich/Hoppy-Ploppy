@@ -12,7 +12,6 @@ public class OrientGrass : MonoBehaviour
         {
             if (hit.transform.tag == "Terrain")
             {
-                Debug.Log(hit.normal);
                 transform.rotation = Quaternion.Euler(hit.normal.x * Mathf.Rad2Deg, hit.normal.y * Mathf.Rad2Deg, hit.normal.z * Mathf.Rad2Deg);
                 transform.position = hit.point - new Vector3(0,0.4f,0);
                 return;

@@ -19,8 +19,8 @@ public class GameController : MonoBehaviour
 
     private void Update()
     {
-        // Check for 100% poopletion
-        if (PoopSpread.count == PoopSpread.mapSize)
+        // Check for almost 100% poopletion
+        if (PoopSpread.count > PoopSpread.mapSize-100)
         {
             // Win game
             Debug.Log("Win");
