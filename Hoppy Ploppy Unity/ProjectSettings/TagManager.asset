@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Food
   - Tree
+  - Police
   layers:
   - Default
   - TransparentFX
