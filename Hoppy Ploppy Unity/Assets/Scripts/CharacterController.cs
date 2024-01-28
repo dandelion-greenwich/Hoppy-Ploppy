@@ -6,7 +6,7 @@ public class CharacterController : MonoBehaviour
     CameraController cameraController;
     public float JumpHeight;
 
-    public bool jumping, climbing;
+    public bool jumping, climbing, treeColl;
 
     public float shitMeter;
 
@@ -22,6 +22,10 @@ public class CharacterController : MonoBehaviour
     void Update()
     {
         transform.rotation = Quaternion.EulerAngles(0, cameraController.angleAroundCharacter, 0);
+        if (treeColl)
+        {
+            CollidingWithTree();
+        }
         CaptureInput();
         
     }
@@ -33,7 +37,7 @@ public class CharacterController : MonoBehaviour
             {
                 var pos = transform.position;
                 pos -= transform.forward * Speed * Time.deltaTime;
-                transform.position = pos;
+                transform.position = pos;               
             }
             else
             {
@@ -47,7 +51,7 @@ public class CharacterController : MonoBehaviour
             {
                 var pos = transform.position;
                 pos += transform.forward * Speed * Time.deltaTime;
-                transform.position = pos;
+                transform.position = pos;                
             }
             else
             {
@@ -81,8 +85,12 @@ public class CharacterController : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        jumping = false;
-        
+        if (collision.gameObject.tag == "Terrain")
+        {
+            jumping = false;
+            treeColl = false;
+            climbing = false;
+        }        
 
         if (collision.gameObject.tag == "Police")
         {
@@ -93,16 +101,36 @@ public class CharacterController : MonoBehaviour
         if (collision.gameObject.tag == "Tree" && !climbing)
         {
             climbing = true;
-            GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePositionY; 
-            //Debug.Log("climbing");
+            treeColl = true;
+            jumping = false;
+            Debug.Log("climbing");
+        }        
+        
+        if(collision == null)
+        {
+            jumping = false;
+            climbing = false;
+            treeColl = false;
+        }       
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        
+    }
+
+    void CollidingWithTree()
+    {
+        if (!treeColl && !climbing)
+        {
+            GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
+            GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotationX;
+            GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotationZ;            
         }
         else
-        {                   
-            climbing = false;
-            GetComponent<Rigidbody>().constraints &= ~RigidbodyConstraints.FreezePositionY;            
+        {
+            GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePositionY;
         }
-        
-        
     }
 
     void Shit(float ammount)
@@ -118,7 +146,7 @@ public class CharacterController : MonoBehaviour
     
     public void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Food")
+        if (other.gameObject.tag == "Food" && shitMeter < 100)
         {
             Destroy(other.gameObject);
             shitMeter++;
