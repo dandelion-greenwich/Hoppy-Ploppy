@@ -90,6 +90,7 @@ public class NPCsController : MonoBehaviour
                     //Debug.Log($"NPC going to position ({newXPos},{newYPos})");
                     agent.destination = new Vector3(newXPos, 0, newYPos);
                     var startWonderTime = Time.time;
+                    agent.speed = 3.5f;
                     while (Time.time - startWonderTime < persistance)
                     {
                         if (mode != NPCMode.Wonder) break;
@@ -108,6 +109,7 @@ public class NPCsController : MonoBehaviour
                         Mathf.Max(investigationZone.y + investigateZoneSize));
                     //Debug.Log($"NPC Move Away to position ({newXPos},{newYPos})");
                     agent.destination = new Vector3(newXPos, 0, newYPos);
+                    agent.speed = 6;
                     while (agent.remainingDistance > 0.3)
                     {
                         yield return null;
