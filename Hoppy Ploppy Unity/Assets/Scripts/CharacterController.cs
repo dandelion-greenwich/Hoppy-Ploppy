@@ -66,6 +66,7 @@ public class CharacterController : MonoBehaviour
 
         if (collision.gameObject.tag == "Police")
         {
+            Debug.Log("Loose");
             Application.Quit();
         }
     }

@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using System;
 
@@ -8,9 +6,10 @@ public static class PoopSpread
     static public float[][] PoopSpreadGrid;
     static int xLength => PoopSpreadGrid.Length;
     static int yLength => PoopSpreadGrid[0].Length;
-    static int count;
+    public static int mapSize => xLength * yLength;
+    public static int count { get; private set; }
 
-    public static void SpreadPoop(float xpos, float ypos, float courics, float pungance) { // courics is radius of spread, pungance is strength
+    public static void SpreadPoop(float xpos, float ypos, float courics, float pungance, Action<int,int> AddGrass) { // courics is radius of spread, pungance is strength
         for (int x = Mathf.Max(0,Mathf.FloorToInt(xpos-courics-1)); x < Mathf.Min(Mathf.CeilToInt(xpos + courics + 1), xLength); x++)
         {
             for (int y = Mathf.Max(0,Mathf.FloorToInt(ypos - courics - 1)); y < Mathf.Min(yLength, Mathf.CeilToInt(ypos + courics + 1)); y++)
@@ -21,8 +20,9 @@ public static class PoopSpread
                 if (distance <= courics) {
                     try
                     {
-                        if (pungance == 0) 
-                        { 
+                        if (PoopSpreadGrid[x][y] == 0 && pungance != 0) 
+                        {
+                            AddGrass(x,y);
                             count++;
                             Debug.Log(count);
                         }
@@ -30,6 +30,7 @@ public static class PoopSpread
                     }
                     catch (Exception e)
                     {
+                        //Debug.LogWarning(e);
                         Debug.LogWarning($"Uh oh, you are trying to shit outside the map!! coords: ({x},{y})");
                     }
                 }

@@ -17,6 +17,17 @@ public class GameController : MonoBehaviour
         }
     }
 
+    private void Update()
+    {
+        // Check for 100% poopletion
+        if (PoopSpread.count == PoopSpread.mapSize)
+        {
+            // Win game
+            Debug.Log("Win");
+            Application.Quit();
+        }
+    }
+
     private void OnDrawGizmos()
     {
         if (PoopSpread.PoopSpreadGrid == null) return;

@@ -83,7 +83,7 @@ public class PoliceController : MonoBehaviour
             switch (mode)
             {
                 case PoliceMode.Wonder:
-                    Debug.Log("Police Wonder");
+                    //Debug.Log("Police Wonder");
                     newXPos = Random.Range(0, gameController.mapXSize);
                     newYPos = Random.Range(0, gameController.mapYSize);
                     //Debug.Log($"Police going to position ({newXPos},{newYPos})");
@@ -96,7 +96,7 @@ public class PoliceController : MonoBehaviour
                     }
                     break;
                 case PoliceMode.Investigate:
-                    Debug.Log("Police Investigate");
+                    //Debug.Log("Police Investigate");
                     newXPos = Random.Range(
                         Mathf.Max(0, investigationZone.x - investigateZoneSize), 
                         Mathf.Min(investigationZone.x + investigateZoneSize));
@@ -111,19 +111,18 @@ public class PoliceController : MonoBehaviour
                     }
                     break;
                 case PoliceMode.Chase:
-                    Debug.Log("Police Chase");
+                    //Debug.Log("Police Chase");
                     agent.destination = player.transform.position;
                     while (agent.remainingDistance < maxDistanceToStopChasing)
                     {
                         agent.destination = player.transform.position;
-                        Debug.Log("Police Chase 1");
                         if (mode != PoliceMode.Chase) break;
                         yield return new WaitForSeconds(0.5f);
                     }
                     yield return new WaitForSeconds(0.5f);
                     break;
             }
-
+            yield return null;
         }
     }
 
